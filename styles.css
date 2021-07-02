@@ -1,0 +1,254 @@
+
+
+.selectDisable {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+html, body, #game-container {
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+    text-align: center;
+    padding: 0;
+    color: white;
+    background-image: url(stage.svg);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+}
+
+.main-app {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.body,
+.wrapper {
+  /* Break the flow */
+  position: absolute;
+  top: 0px;
+
+  /* Give them all the available space */
+  width: 100%;
+  height: 100%;
+
+  /* Remove the margins if any */
+  margin: 0;
+
+  /* Allow them to scroll down the document */
+  overflow-y: hidden;
+}
+
+.body {
+  /* Sending body at the bottom of the stack */
+  z-index: 1;
+}
+
+.wrapper {
+  /* Making the wrapper stack above the body */
+  z-index: 2;
+}
+
+.tic-tac-toe-board {
+    user-select: none;
+    position: relative;
+    table-layout: fixed;
+    margin: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+}
+
+.tic-tac-toe-board tr {
+    height: 33.3%;
+}
+
+tr:first-child .tic-tac-toe-piece {
+    border-top: none;
+}
+
+tr:last-child .tic-tac-toe-piece {
+    border-bottom: none;
+}
+
+.tic-tac-toe-piece:first-child {
+    border-left: none;
+}
+.tic-tac-toe-piece:last-child {
+    border-right: none;
+}
+.tic-tac-toe-piece {
+    border: 4px brown solid;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.tic-tac-toe-piece-filled {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 64px;
+    line-height: 0;
+    white-space: nowrap;
+}
+
+.tic-tac-toe-piece-X {
+    color: blue;
+}
+
+.tic-tac-toe-piece-O {
+    color: orange;
+}
+
+.tic-tac-toe-piece-filled, .tic-tac-toe-piece-disabled  {
+    cursor: default;
+}
+
+.game-message {
+    /*height: 1.5em;*/
+}
+
+.tic-tac-toe-category {
+    font-weight: bold;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+}
+@keyframes options-opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.question-options-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation-name: options-opacity;
+    animation-duration: 200ms;
+    animation-fill-mode: forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.question-options {
+    display: inline-block;
+    background-color: white;
+    color: black;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.question-option {
+    background-color: #1e66d3;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    padding: 8px 16px;
+    margin: 0.5rem;
+    transition: background-color 0.2s linear;
+}
+.question-option:not(:disabled):hover {
+    background-color: #144794;
+}
+
+.question-option:disabled {
+    opacity: 0.6;
+}
+
+.money-dashboard {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: #81ff7d;
+    display: flex;
+    width: 100%;
+    max-width: 200px;
+    padding: 0.25rem 1rem;
+}
+.money-dashboard img {
+    height: 1.7em;
+    margin: 0 4px;
+}
+.money-dashboard span {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    flex-grow: 1;
+    font-weight: bold;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes cash-animation {
+    0% {
+        opacity: 0;
+        transform: rotateZ(-90deg) scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: rotateZ(90deg) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: rotateZ(-90deg) scale(0);
+    }
+}
+
+.cash-animation-container {
+    position: fixed;
+    top: 0;
+    pointer-events: none;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cash-animation {
+    animation: cash-animation 2s linear;
+    animation-fill-mode: forwards;
+}
