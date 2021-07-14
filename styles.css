@@ -77,21 +77,22 @@ html, body, #game-container {
 .tic-tac-toe-board {
     user-select: none;
     position: relative;
-    table-layout: fixed;
     margin: 2rem;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 16px;
 }
 
-.tic-tac-toe-board tr {
+.tic-tac-toe-board-row {
+    width: 100%;
     height: 33.3%;
+    display: flex;
 }
 
-tr:first-child .tic-tac-toe-piece {
+.tic-tac-toe-board-row:first-child .tic-tac-toe-piece {
     border-top: none;
 }
 
-tr:last-child .tic-tac-toe-piece {
+.tic-tac-toe-board-row:last-child .tic-tac-toe-piece {
     border-bottom: none;
 }
 
@@ -102,8 +103,9 @@ tr:last-child .tic-tac-toe-piece {
     border-right: none;
 }
 .tic-tac-toe-piece {
-    border: 4px brown solid;
+    border: 2px brown solid;
     position: relative;
+    flex: 0 0 33.3%;
     cursor: pointer;
     overflow: hidden;
 }
@@ -143,6 +145,21 @@ tr:last-child .tic-tac-toe-piece {
     height: 100%;
     padding: 0.5rem;
 }
+
+.tic-tac-toe-value-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+}
+
 @keyframes options-opacity {
     from {
         opacity: 0;
@@ -167,7 +184,7 @@ tr:last-child .tic-tac-toe-piece {
     justify-content: center;
     align-items: center;
 }
-.question-options {
+.question-options, .computer-question-options {
     display: inline-block;
     background-color: white;
     color: black;
@@ -175,7 +192,11 @@ tr:last-child .tic-tac-toe-piece {
     padding: 0.5rem 1rem;
 }
 
-.question-option {
+.computer-question-options {
+    background-color: #aaa;
+}
+
+.question-option, .computer-question-option {
     background-color: #1e66d3;
     border: none;
     border-radius: 4px;
@@ -185,6 +206,23 @@ tr:last-child .tic-tac-toe-piece {
     margin: 0.5rem;
     transition: background-color 0.2s linear;
 }
+
+button.computer-question-option {
+    cursor: default;
+}
+
+.computer-question-option-chosen.computer-question-option-correct {
+    background-color: green;
+}
+
+.computer-question-option-chosen.computer-question-option-incorrect {
+    background-color: red;
+}
+
+.computer-question-option-not-chosen {
+    opacity: 0.5;
+}
+
 .question-option:not(:disabled):hover {
     background-color: #144794;
 }
