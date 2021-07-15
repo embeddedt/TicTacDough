@@ -20,8 +20,8 @@ module.exports = env => { return {
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.jsx?$/,
-                include: function(absPath){ return (/frontend\/src/.test(absPath) || /exact-trie/.test(absPath) || /react-children-utilities/.test(absPath) || /react-element-spinner/.test(absPath) || /recoil/.test(absPath) || /src/.test(absPath)); },
+                test: /\.m?jsx?$/,
+                include: function(absPath){ return (/frontend\/src/.test(absPath) || /seedrandom/.test(absPath) || /exact-trie/.test(absPath) || /react-children-utilities/.test(absPath) || /react-element-spinner/.test(absPath) || /recoil/.test(absPath) || /src/.test(absPath)); },
                 use: [
                     babel
                 ]
