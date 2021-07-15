@@ -4,3 +4,4 @@ node_modules
 intermediate
 built/style_tmp.css
 *.map
+!/core_script_compiled.js.map

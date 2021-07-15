@@ -52,7 +52,7 @@ module.exports = env => { return {
         path: __dirname,
         pathinfo: false
     },
-    devtool: isProduction(env) ? false : 'eval-cheap-module-source-map',
+    devtool: isProduction(env) ? 'source-map' : 'eval-cheap-module-source-map',
     optimization: {
         usedExports: true,
         concatenateModules: isProduction(env),
