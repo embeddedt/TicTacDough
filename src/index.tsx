@@ -79,15 +79,8 @@ const scriptPromise = new Promise<void>((resolve) => {
             (window as any).questions = (window as any).questions.filter((question) => question.single_choice);
             
             if((window as any).questions.length < 9) {
-                console.warn("This quiz set contains less than 9 pairs. This will result in duplicate questions.");
-                const newSet = shuffle((window as any).questions.slice());
-                let i = 0;
-                while((window as any).questions.length < 9) {
-                    (window as any).questions.push(newSet[i]);
-                    i++;
-                    if(i >= newSet.length)
-                        i = 0;
-                }
+                window.alert("This quiz set contains less than 9 pairs, and is not compatible with Tic Tac Dough. Please report this to All-In-One Homeschool.");
+                throw new Error("Less than 9 pairs in quiz set");
             }
             const questionSet = shuffle((window as any).questions.slice());
             for (let i = 0; i < questionSet.length; i++) {
