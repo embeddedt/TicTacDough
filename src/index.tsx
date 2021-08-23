@@ -370,9 +370,10 @@ function minimax(board: TicTacToeBoardStorage, depth: number, isMaximizingPlayer
 
 let round = 1;
 
-function makeComputerMove(boardState: ReturnType<typeof useTicTacToeBoard>) {
+function makeComputerMove(boardState: ReturnType<typeof useTicTacToeBoard>): { bestX: number, bestY: number, idx: number } {
     let bestVal = Number.MAX_VALUE;
     let bestX, bestY;
+    let theIdx;
     const fakeBoard = boardState.board.slice() as TicTacToeBoardStorage;
     for (var y = 0; y < 3; y++) {
         for (var x = 0; x < 3; x++) {
@@ -385,13 +386,13 @@ function makeComputerMove(boardState: ReturnType<typeof useTicTacToeBoard>) {
                     bestVal = moveVal;
                     bestX = x;
                     bestY = y;
+                    theIdx = idx;
                 }
             }
         }
     }
     if (typeof bestX != "number") throw new Error("Invariant violation: move not found.");
-    boardState.setPieceAtPos(bestX, bestY, TicTacToePieceValue.O);
-    round++;
+    return { bestX, bestY, idx: theIdx };
 }
 
 enum Turn {
@@ -435,16 +436,17 @@ function App() {
             (async function () {
                 console.log("started timeout");
                 await new Promise((resolve) => setTimeout(resolve, 2000));
-                let boardIndex;
-                do {
-                    boardIndex = getRandomIntInclusive(0, boardState.board.length);
-                } while (boardState.board[boardIndex] != TicTacToePieceValue.NONE);
+
+                const shouldBeCorrect = round != 4;
+                const computerMoveData = makeComputerMove(boardState);
+                const boardIndex = computerMoveData.idx;
                 setFakeComputerQuestion(questionSet[boardIndex]);
                 await new Promise((resolve) => setTimeout(resolve, 2000));
-                if (round != 4) {
+                if (shouldBeCorrect) {
                     setFakeComputerAnswer(questionSet[boardIndex].answers[0]);
                     setLastPersonGuessedWrong(false);
-                    makeComputerMove(boardState);
+                    boardState.setPieceAtPos(computerMoveData.bestX, computerMoveData.bestY, TicTacToePieceValue.O);
+                    round++;
                     correctSound.play();
                     incrementMoney();
                 } else {
