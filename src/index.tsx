@@ -459,8 +459,8 @@ function App() {
                     setLastPersonGuessedWrong(true);
                     incorrectSound.play();
                 }
-                await new Promise((resolve) => setTimeout(resolve, 2000));
                 setTurn(Turn.Player);
+                await new Promise((resolve) => setTimeout(resolve, 2000));
                 yourTurnSound.play();
                 setFakeComputerQuestion(null);
                 setFakeComputerAnswer(null);
